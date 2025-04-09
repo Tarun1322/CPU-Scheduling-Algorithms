@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- SEO Meta Tags -->
+    <title>CPU Scheduling Algorithms Simulator | By Tarun</title>
+    <meta name="description" content="Interactive CPU scheduling algorithm simulator featuring FCFS, SJF, SRTF, Round Robin, and Priority scheduling. Created by Tarun for educational purposes.">
+    <meta name="author" content="Tarun">
+    <meta name="keywords" content="CPU scheduling, FCFS, SJF, SRTF, Round Robin, Priority scheduling, Operating Systems, Process scheduling, Computer Science, Tarun">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="CPU Scheduling Algorithms Simulator">
+    <meta property="og:description" content="Interactive CPU scheduling algorithm simulator with visualization. Created by Tarun.">
+    <meta property="og:type" content="website">
+    <meta property="og:author" content="Tarun">
+    <meta property="og:url" content="https://github.com/Tarun1322">
+    
+    <!-- Additional Meta Information -->
+    <meta name="application-name" content="CPU Scheduler">
+    <meta name="creator" content="Tarun">
+    <meta name="copyright" content="© 2025 Tarun. All rights reserved.">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#4c6ef5">
+    
+    <!-- Existing links -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Schema.org markup for Google -->
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "CPU Scheduling Algorithms Simulator",
+        "author": {
+            "@type": "Person",
+            "name": "Tarun",
+            "url": "https://github.com/Tarun1322"
+        },
+        "description": "An interactive web-based CPU scheduling algorithm simulator featuring multiple scheduling algorithms with visualization.",
+        "applicationCategory": "Educational Software",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+</head>
+<body>
+    
+    <!-- Existing content -->
+    <div class="container">
+        <div class="theme-switch-wrapper">
+            <label class="theme-switch" for="checkbox">
+                <input type="checkbox" id="checkbox" />
+                <div class="slider round">
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </div>
+            </label>
+        </div>
+        <span id="modeIndicator" class="mode-indicator">Light Mode</span>
+        <h1>CPU Scheduling Algorithms</h1>
+        
+        <div class="main-content">
+            <div class="left-panel">
+                <h2>Algorithm Selection</h2>
+                <div class="algorithm-select">
+                    <select id="algorithm">
+                        <option value="fcfs">First Come First Served (FCFS)</option>
+                        <option value="sjf">Shortest Job First (Non-preemptive)</option>
+                        <option value="srtf">Shortest Remaining Time First (Preemptive)</option>
+                        <option value="rr">Round Robin</option>
+                        <option value="priority-np">Priority (Non-preemptive)</option>
+                        <option value="priority-p">Priority (Preemptive)</option>
+                    </select>
+                    <div id="timeQuantumInput" style="display: none;">
+                        <label for="timeQuantum">Time Quantum:</label>
+                        <input type="number" id="timeQuantum" min="1" placeholder="Enter time quantum">
+                    </div>
+                </div>
+                
+                <div class="input-section">
+                    <h2>Process Inputs</h2>
+                    <div class="process-inputs">
+                        <div class="input-group">
+                            <label>Arrival Times (space-separated)</label>
+                            <textarea id="arrivalInput" placeholder="Example: 0 1 2 3" rows="1"></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label>Burst Times (space-separated)</label>
+                            <textarea id="burstInput" placeholder="Example: 3 6 4 5" rows="1"></textarea>
+                        </div>
+                        <div class="input-group" id="priorityInput" style="display: none;">
+                            <label>Priority Values (space-separated)</label>
+                            <textarea id="priorityValues" placeholder="Example: 2 1 4 3" rows="1"></textarea>
+                        </div>
+                        <button onclick="window.processInput()">Process Input</button>
+                    </div>
+                    <!-- Wrap the calculate button in the new container -->
+                    <div class="calculate-button-container">
+                        <button onclick="window.calculateScheduling()">Calculate</button>
+                    </div>
+                </div>
+
+                <div class="process-list">
+                    <h2>Processes</h2>
+                    <table id="processTable">
+                        <thead>
+                            <tr>
+                                <th>Process</th>
+                                <th>Arrival Time</th>
+                                <th>Burst Time</th>
+                                <th class="priority-column" style="display: none;">Priority</th>
+                            </tr>
+                        </thead>
+                        <tbody id="processTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="right-panel">
+                <div class="visualization">
+                    <div class="gantt-section">
+                        <div class="gantt-header">
+                            <h2>Gantt Chart</h2>
+                            <div class="algorithm-name">
+                                <span>Algorithm:</span>
+                                <div id="currentAlgorithm">No algorithm selected</div>
+                            </div>
+                        </div>
+                        <div id="ganttChart"></div>
+                    </div>
+                    <!-- Add after existing Gantt chart -->
+<div id="liveVisualization">
+    <h3>Real-time Visualization</h3>
+    <div id="simulationControls">
+        <!-- Change your start button to this -->
+<button id="startBtn" onclick="startLiveVisualization(lastResult)">▶ Start Simulation</button>
+        <button id="pauseBtn" onclick="togglePause()">⏸ Pause</button>
+        <button onclick="resetSimulation()">↻ Reset</button>
+    </div>
+    <div id="ganttContainer">
+        <div id="ganttChartLive" class="gantt-chart"></div>
+    </div>
+    <div id="timeCounter">
+        Elapsed Time: <span id="currentTime">0</span>s
+    </div>
+    <div id="liveMetrics">
+        <!-- <div class="live-metric">Current Time: <span id="currentTime">0</span></div> -->
+        <!-- <div class="live-metric">Avg Turnaround: <span id="avgTurnaroundLive">0</span></div> -->
+        <!-- <div class="live-metric">Avg Waiting: <span id="avgWaitingLive">0</span></div> -->
+    </div>
+</div>
+                    <div class="results">
+                        <h2>Results</h2>
+                        <div id="resultTable"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <a href="https://github.com/Tarun1322" class="github-logo" target="_blank" rel="noopener noreferrer">
+        <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Logo">
+    </a>
+    <script src="script.js" type="module"></script>
+</body>
+</html>
