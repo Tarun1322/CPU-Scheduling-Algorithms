@@ -17,7 +17,7 @@ To install and run the project locally, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/tejasvijain09/Intelligent-CPU-Scheduler-Simulator.git
+   git clone https://github.com/Tarun1322/CPU-Scheduling-Algorithms.git
    ```
 2. Navigate to the project directory:
    ```bash
@@ -73,5 +73,5 @@ Contributions are welcome! If you have any suggestions or improvements, please c
 - Create a pull request to the main repository.
 
 ## Resources
-- [GitHub Repository](https://github.com/tejasvijain09/Intelligent-CPU-Scheduler-Simulator.git)
-- [Tejasvi's GitHub Profile](https://github.com/tejasvijain09)
+- [GitHub Repository](https://github.com/Tarun1322/CPU-Scheduling-Algorithms.git)
+- [Tarun's GitHub Profile](https://github.com/Tarun1322)
